@@ -2,10 +2,10 @@
 #+author: NrdyBhu1
 #+date: 2022-10-27
 
- - [X] Player Controls
- - [X] Particle System
- - [X] Enemy System
- - [X] Music
- - [ ] Enemy to Enemy Collision
- - [ ] Enemy to player Collision
- - [ ] UI
+ - DONE Player Controls
+ - DONE Particle System
+ - DONE Enemy System
+ - DONE Music
+ - TODO Enemy to Enemy Collision
+ - TODO Enemy to player Collision
+ - TODO UI
