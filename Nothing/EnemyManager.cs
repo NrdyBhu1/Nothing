@@ -8,11 +8,11 @@ namespace Nothing
 {
     public class EnemyManager 
     {
-        private Enemy[] enemies;
-        private Random random;
-        private SoundEffect effect;
+        private static Enemy[] enemies;
+        private static Random random;
+        private static SoundEffect effect;
 
-        public void Initialize(GraphicsDevice graphicsDevice, ContentManager content)
+        public static void Initialize(GraphicsDevice graphicsDevice, ContentManager content)
         {
             random = new Random();
             enemies = new Enemy[100];
@@ -25,7 +25,7 @@ namespace Nothing
             effect = content.Load<SoundEffect>("mutantdie");
         }
 
-        public bool Click(Point mousePos)
+        public static bool Click(Point mousePos)
         {
             for (int i = 0; i < enemies.Length; i++)
             {
@@ -47,7 +47,7 @@ namespace Nothing
             return false;
         }
 
-        public void Update(Vector2 position)
+        public static void Update(Vector2 position)
         {
             for (int i = 0; i < enemies.Length; i++)
             {
@@ -58,7 +58,7 @@ namespace Nothing
             }
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public static void Draw(SpriteBatch spriteBatch)
         {
             for (int i = 0; i < enemies.Length; i++)
             {
@@ -69,7 +69,7 @@ namespace Nothing
             }
         }
 
-        public void Dispose()
+        public static void Dispose()
         {
             for (int i = 0; i < enemies.Length; i++)
             {

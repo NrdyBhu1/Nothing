@@ -10,8 +10,6 @@ namespace Nothing
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         private Player player;
-        private ParticleManager particleManager;
-        private EnemyManager enemyManager;
         private Song song;
 
         public NothingGame()
@@ -20,8 +18,6 @@ namespace Nothing
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
             player = new Player();
-            particleManager = new ParticleManager();
-            enemyManager = new EnemyManager();
         }
 
         protected override void Initialize()
@@ -32,8 +28,8 @@ namespace Nothing
             _graphics.PreferredBackBufferHeight = 600;
             _graphics.PreferredBackBufferWidth = 800;
             player.Initialize(_graphics.GraphicsDevice);
-            particleManager.Initialize(_graphics.GraphicsDevice);
-            enemyManager.Initialize(_graphics.GraphicsDevice, Content);
+            ParticleManager.Initialize(_graphics.GraphicsDevice);
+            EnemyManager.Initialize(_graphics.GraphicsDevice, Content);
         }
 
         protected override void LoadContent()
@@ -51,17 +47,17 @@ namespace Nothing
                 Exit();
 
             if (Mouse.GetState().LeftButton == ButtonState.Pressed) {
-                bool destroyed = enemyManager.Click(Mouse.GetState().Position);
+                bool destroyed = EnemyManager.Click(Mouse.GetState().Position);
                 if (destroyed)
-                    particleManager.InstantiateAt(Mouse.GetState().Position.ToVector2());
+                    ParticleManager.InstantiateAt(Mouse.GetState().Position.ToVector2());
             }
 
             // DONE: Add your update logic here
 
             base.Update(gameTime);
             player.Update();
-            particleManager.Update();
-            enemyManager.Update(player.position);
+            ParticleManager.Update();
+            EnemyManager.Update(player.position);
         }
 
         protected override void Draw(GameTime gameTime)
@@ -69,8 +65,8 @@ namespace Nothing
             GraphicsDevice.Clear(Color.Gray);
             _spriteBatch.Begin();
             player.Draw(_spriteBatch);
-            enemyManager.Draw(_spriteBatch);
-            particleManager.Draw(_spriteBatch);
+            EnemyManager.Draw(_spriteBatch);
+            ParticleManager.Draw(_spriteBatch);
             _spriteBatch.End();
             base.Draw(gameTime);
         }
@@ -78,8 +74,8 @@ namespace Nothing
         protected override void Dispose(bool disposing)
         {
             player.Dispose();
-            particleManager.Dispose();
-            enemyManager.Dispose();
+            ParticleManager.Dispose();
+            EnemyManager.Dispose();
             song.Dispose();
             base.Dispose(disposing);
         }

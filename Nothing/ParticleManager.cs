@@ -11,12 +11,12 @@ namespace Nothing
     /// </summary>
     public class ParticleManager
     {
-        private Particle[] particles;
+        private static Particle[] particles;
 
         /// <summary>
         /// <param name="graphicsDevice"> graphics device of game </param>
         /// </summary>
-        public void Initialize(GraphicsDevice graphicsDevice)
+        public static void Initialize(GraphicsDevice graphicsDevice)
         {
 
             if (graphicsDevice == null)
@@ -34,14 +34,14 @@ namespace Nothing
             }
         }
 
-        public void InstantiateAt(Vector2 position) {
+        public static void InstantiateAt(Vector2 position) {
             for (int i = 0; i < 50; i++)
             {
                 particles[i].PopAt(position);
             }
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public static void Draw(SpriteBatch spriteBatch)
         {
             for (int i = 0; i < 50; i++)
             {
@@ -52,7 +52,7 @@ namespace Nothing
             }
         }
 
-        public void Update()
+        public static void Update()
         {
             for (int i = 0; i < 50; i++)
             {
@@ -63,7 +63,7 @@ namespace Nothing
             }
         }
 
-        public void Dispose()
+        public static void Dispose()
         {
             for (int i = 0; i < particles.Length; i++)
             {
