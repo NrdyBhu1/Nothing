@@ -5,6 +5,33 @@ namespace Nothing
 {
     public class Math
     {
+        public static Random random = new Random();
+
+        public static float RandFloat()
+        {
+            return (float)random.NextDouble();
+        }
+        public static double RandDouble()
+        {
+            return random.NextDouble();
+        }
+
+
+        public static int Rand()
+        {
+            return random.Next();
+        }
+
+        public static int Rand(int maxValue)
+        {
+            return random.Next(maxValue);
+        }
+
+        public static int Rand(int minValue, int maxValue)
+        {
+            return random.Next(minValue, maxValue);
+        }
+
         public static bool RectsCollide(Rectangle one, Rectangle two)
         {
             return PointInRect(new Point(one.X, one.Y), two) ||

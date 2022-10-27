@@ -1,4 +1,3 @@
-using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -10,13 +9,13 @@ namespace Nothing
         public Vector2 position;
         private Vector2 velocity;
         public bool disabled { get; set; }
-        public void Initialize(GraphicsDevice graphicsDevice, Random random)
+        public void Initialize(GraphicsDevice graphicsDevice)
         {
             texture = new Texture2D(graphicsDevice, 50, 50);
             Color[] data = new Color[50*50];
             for (int i = 0; i < data.Length; i++) data[i] = Color.Orchid;
             texture.SetData(data);
-            position = new Vector2((float)random.Next(-100, 1000), (float)random.Next(-100, 1000));
+            position = new Vector2((float)Math.Rand(-100, 1000), (float)Math.Rand(-100, 1000));
             velocity = Vector2.Zero;
             disabled = false;
         }

@@ -1,4 +1,3 @@
-using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -9,12 +8,10 @@ namespace Nothing
         private Texture2D texture;
         private Vector2 position;
         private Vector2 velocity;
-        private Random random;
         private float opacity;
         public void Initialize(GraphicsDevice graphicsDevice, Vector2 _position)
         {
-            random = new Random();
-            texture = new Texture2D(graphicsDevice, random.Next(1, 10), random.Next(1, 10));
+            texture = new Texture2D(graphicsDevice, Math.Rand(1, 10), Math.Rand(1, 10));
             Color[] data = new Color[texture.Width * texture.Height];
             for (int i = 0; i < data.Length; ++i) data[i] = Color.SandyBrown;
             texture.SetData(data);
@@ -23,8 +20,8 @@ namespace Nothing
         }
 
         private void SetVecs(Vector2 _position) {
-            position = new Vector2(random.Next((int)_position.X - 20, (int)_position.X + 20), random.Next((int)_position.Y - 20, (int)_position.Y + 20));
-            velocity = new Vector2((float)random.NextDouble(), (float)random.NextDouble());
+            position = new Vector2(Math.Rand((int)_position.X - 20, (int)_position.X + 20), Math.Rand((int)_position.Y - 20, (int)_position.Y + 20));
+            velocity = new Vector2(Math.RandFloat(), Math.RandFloat());
         }
 
         public void PopAt(Vector2 _position)

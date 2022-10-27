@@ -46,14 +46,9 @@ namespace Nothing
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            if (Mouse.GetState().LeftButton == ButtonState.Pressed) {
-                bool destroyed = EnemyManager.Click(Mouse.GetState().Position);
-                if (destroyed)
-                    ParticleManager.InstantiateAt(Mouse.GetState().Position.ToVector2());
-            }
-
             // DONE: Add your update logic here
 
+            StateManager.Update();
             base.Update(gameTime);
             player.Update();
             ParticleManager.Update();

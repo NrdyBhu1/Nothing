@@ -13,7 +13,6 @@ namespace Nothing
         public float speed { set; get; }
 
         // private variables
-        private KeyboardState state;
         public Vector2 position;
         private Vector2 velocity;
         private Texture2D texture;
@@ -59,10 +58,8 @@ namespace Nothing
         public void Update()
         {
             // TODO: Make Centrally Controlled Keyboard state
-            state = Keyboard.GetState();
+            KeyboardState state = StateManager.NewKeyboardState;
 
-            // position.X += velocity.X * speed;
-            // position.Y += velocity.Y * speed;
             position += velocity * speed;
 
             #region Keyboard
@@ -71,24 +68,20 @@ namespace Nothing
             if (state.IsKeyDown(Keys.W) || state.IsKeyDown(Keys.Up))
             {
                 velocity.Y = -1;
-                // Console.WriteLine("Going Down!");
             }
             else if (state.IsKeyDown(Keys.S) || state.IsKeyDown(Keys.Down))
             {
                 velocity.Y = 1;
-                // Console.WriteLine("Going Up!");
             }
 
             // Left and Right
             if (state.IsKeyDown(Keys.A) || state.IsKeyDown(Keys.Left))
             {
                 velocity.X = -1;
-                // Console.WriteLine("Going Left!");
             }
             else if (state.IsKeyDown(Keys.D) || state.IsKeyDown(Keys.Right))
             {
                 velocity.X = 1;
-                // Console.WriteLine("Going Right!");
             }
 
             // KeyUp
@@ -108,10 +101,6 @@ namespace Nothing
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            // Console.Write("Position: ");
-            // Console.WriteLine(position);
-            // Console.Write("Velocity: ");
-            // Console.WriteLine(velocity);
             spriteBatch.Draw(texture, position, Color.White);
         }
 

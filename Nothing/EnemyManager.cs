@@ -1,32 +1,31 @@
-using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Input;
 
 namespace Nothing 
 {
     public class EnemyManager 
     {
         private static Enemy[] enemies;
-        private static Random random;
         private static SoundEffect effect;
 
         public static void Initialize(GraphicsDevice graphicsDevice, ContentManager content)
         {
-            random = new Random();
             enemies = new Enemy[100];
             for (int i = 0; i < 100; i++)
             {
                 enemies[i] = new Enemy();
-                enemies[i].Initialize(graphicsDevice, random);
+                enemies[i].Initialize(graphicsDevice);
             }
 
             effect = content.Load<SoundEffect>("mutantdie");
         }
 
-        public static bool Click(Point mousePos)
+        public static bool Click()
         {
+            Point mousePos = StateManager.NewMouseState.Position;
             for (int i = 0; i < enemies.Length; i++)
             {
                 if (
@@ -40,6 +39,7 @@ namespace Nothing
                 {
                     effect.Play();
                     enemies[i].disabled = true;
+                    ParticleManager.InstantiateAt(mousePos.ToVector2());
                     return true;
                 }
             }
@@ -55,6 +55,11 @@ namespace Nothing
                     continue;
 
                 enemies[i].Update(position);
+            }
+
+            if (StateManager.OldMouseState.LeftButton == ButtonState.Released && 
+                StateManager.NewMouseState.LeftButton == ButtonState.Pressed) {
+                    Click();
             }
         }
 
