@@ -9,15 +9,13 @@ namespace Nothing
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
-        private Player player;
         private Song song;
 
-        public NothingGame()
+        public NothingGame(string ContentDirectory)
         {
             _graphics = new GraphicsDeviceManager(this);
-            Content.RootDirectory = "Content";
+            Content.RootDirectory = ContentDirectory;
             IsMouseVisible = true;
-            player = new Player();
         }
 
         protected override void Initialize()
@@ -27,7 +25,7 @@ namespace Nothing
             base.Initialize();
             _graphics.PreferredBackBufferHeight = 600;
             _graphics.PreferredBackBufferWidth = 800;
-            player.Initialize(_graphics.GraphicsDevice);
+            Player.Initialize(_graphics.GraphicsDevice);
             ParticleManager.Initialize(_graphics.GraphicsDevice);
             EnemyManager.Initialize(_graphics.GraphicsDevice, Content);
         }
@@ -50,16 +48,16 @@ namespace Nothing
 
             StateManager.Update();
             base.Update(gameTime);
-            player.Update();
+            Player.Update();
             ParticleManager.Update();
-            EnemyManager.Update(player.position);
+            EnemyManager.Update();
         }
 
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.Gray);
             _spriteBatch.Begin();
-            player.Draw(_spriteBatch);
+            Player.Draw(_spriteBatch);
             EnemyManager.Draw(_spriteBatch);
             ParticleManager.Draw(_spriteBatch);
             _spriteBatch.End();
@@ -68,7 +66,7 @@ namespace Nothing
 
         protected override void Dispose(bool disposing)
         {
-            player.Dispose();
+            Player.Dispose();
             ParticleManager.Dispose();
             EnemyManager.Dispose();
             song.Dispose();

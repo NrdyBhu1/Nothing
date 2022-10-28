@@ -7,7 +7,7 @@ namespace Nothing
     {
         private Texture2D texture;
         public Vector2 position;
-        private Vector2 velocity;
+        public Vector2 velocity;
         public bool disabled { get; set; }
         public void Initialize(GraphicsDevice graphicsDevice)
         {
@@ -20,6 +20,16 @@ namespace Nothing
             disabled = false;
         }
 
+        public void Reposition()
+        {
+            position = new Vector2((float)Math.Rand(-100, 1000), (float)Math.Rand(-100, 1000));
+        }
+
+        public Rectangle GetRectangle()
+        {
+            return new Rectangle(position.ToPoint(), new Point(50, 50));
+        }
+
         public bool OutOfBounds()
         {
             if (position.X >= 800 || position.Y >= 600)
@@ -28,16 +38,14 @@ namespace Nothing
             return false;
         }
 
-        public void Update(Vector2 playerPosition)
+        public void Update()
         {
 
-            position += velocity;
-
             #region X - axis
-            if (playerPosition.X > position.X)
+            if (Player.position.X > position.X)
             {
                 velocity.X = 1;
-            } else if (playerPosition.X < position.X) 
+            } else if (Player.position.X < position.X) 
             {
                 velocity.X = -1;
             } else 
@@ -47,10 +55,10 @@ namespace Nothing
             #endregion
 
             #region Y - axis
-            if (playerPosition.Y > position.Y)
+            if (Player.position.Y > position.Y)
             {
                 velocity.Y = 1;
-            } else if (playerPosition.Y < position.Y) 
+            } else if (Player.position.Y < position.Y) 
             {
                 velocity.Y = -1;
             } else

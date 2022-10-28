@@ -10,36 +10,17 @@ namespace Nothing
     public class Player
     {
         // public variables
-        public float speed { set; get; }
+        public static float speed = 5f;
 
         // private variables
-        public Vector2 position;
-        private Vector2 velocity;
-        private Texture2D texture;
-
-        /// <summary>
-        /// Player constructor
-        /// current speed is set to param speed
-        /// <param name="_speed">Player's speed</param>
-        /// </summary>
-        public Player(float _speed)
-        {
-            speed = _speed;
-        }
-
-        /// <summary>
-        /// Player constructor
-        /// current speed is set 5f
-        /// </summary>
-        public Player()
-        {
-            speed = 5f;
-        }
+        public static Vector2 position;
+        private static Vector2 velocity;
+        private static Texture2D texture;
 
         /// <summary>
         /// Initialization point for Player
         /// </summary>
-        public void Initialize(GraphicsDevice graphicsDevice)
+        public static void Initialize(GraphicsDevice graphicsDevice)
         {
             texture = new Texture2D(graphicsDevice, 30, 80);
             Color[] data = new Color[80 * 30];
@@ -55,7 +36,7 @@ namespace Nothing
         ///   - check key presses
         ///   - update position
         /// </summary>
-        public void Update()
+        public static void Update()
         {
             // TODO: Make Centrally Controlled Keyboard state
             KeyboardState state = StateManager.NewKeyboardState;
@@ -99,12 +80,12 @@ namespace Nothing
             #endregion
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public static void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(texture, position, Color.White);
         }
 
-        public void Dispose()
+        public static void Dispose()
         {
             texture.Dispose();
         }

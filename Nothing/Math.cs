@@ -3,6 +3,14 @@ using Microsoft.Xna.Framework;
 
 namespace Nothing
 {
+    public enum CollisionType {
+        TopLeft,
+        TopRight,
+        BottomLeft,
+        BottomRight,
+        None
+    }
+
     public class Math
     {
         public static Random random = new Random();
@@ -38,6 +46,23 @@ namespace Nothing
                 PointInRect(new Point(one.X+one.Width, one.Y), two) ||
                 PointInRect(new Point(one.X, one.Y+one.Height), two) ||
                 PointInRect(new Point(one.X, one.Y+one.Height), two);
+        }
+
+        public static CollisionType GetCollisionType(Rectangle one, Rectangle two)
+        {
+            if (PointInRect(new Point(one.X, one.Y), two))
+                return CollisionType.TopLeft;
+
+            if (PointInRect(new Point(one.X+one.Width, one.Y), two))
+                return CollisionType.TopRight;
+
+            if (PointInRect(new Point(one.X, one.Y+one.Height), two))
+                return CollisionType.BottomLeft;
+
+            if (PointInRect(new Point(one.X, one.Y+one.Height), two))
+                return CollisionType.BottomRight;
+
+            return CollisionType.None;
         }
 
         public static bool Vector2InRect(Vector2 vector2, Rectangle rect)
